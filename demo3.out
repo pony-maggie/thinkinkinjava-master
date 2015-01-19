@@ -1,0 +1,77 @@
+1:package com.chapter11;
+2:
+3:import java.io.*;
+4:
+5:public class IOStreamDemo 
+6:{
+7:
+8:	/**
+9:	 * @param args
+10:	 */
+11:	public static void main(String[] args) throws IOException
+12:	{
+13:		// TODO Auto-generated method stub
+14:		BufferedReader in = new BufferedReader(new FileReader("IOStreamDemo.java"));
+15:		String s, s2 = new String();
+16:		
+17:		while((s = in.readLine()) != null)
+18:		{
+19:			s2 += s + "\n";
+20:		}
+21:		in.close();
+22:		
+23:		//input from standard.
+24:		BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+25:		System.out.print("input a line:");
+26:		System.out.println(stdin.readLine());
+27:		
+28:		//input from memory
+29:		StringReader in2 = new StringReader(s2);
+30:		int c;
+31:		while((c = in2.read()) != -1)
+32:			System.out.print((char)c);
+33:		
+34:		//format memory input
+35:		//×Ö½ÚÁ÷, byte
+36:		try 
+37:		{
+38:			DataInputStream in3 = new DataInputStream(new ByteArrayInputStream(s2.getBytes()));
+39:			while(true)
+40:			{
+41:				System.out.println((char)in3.readByte());
+42:			}
+43:		} 
+44:		catch (EOFException e) 
+45:		{
+46:			// TODO: handle exception
+47:			System.err.println("end of stream");
+48:		}
+49:		
+50:		//file output
+51:		try 
+52:		{
+53:			BufferedReader in4 = new BufferedReader(new StringReader(s2));
+54:			PrintWriter out1 = new PrintWriter(new BufferedWriter(new FileWriter("demo.out")));
+55:			PrintWriter out2 = new PrintWriter(new File("demo1.out"));
+56:			PrintWriter out3 = new PrintWriter(new FileWriter("demo3.out"));
+57:			
+58:			int lineNumber = 1;
+59:			while ((s = in4.readLine()) != null) 
+60:			{
+61:				out1.println(lineNumber++ + ":" + s);
+62:			}
+63:			out1.close();
+64:			
+65:		} 
+66:		catch (EOFException e) 
+67:		{
+68:			// TODO: handle exception
+69:			System.err.println("end of stream");
+70:		}
+71:		
+72:		//storing and recovering data
+73:		
+74:
+75:	}
+76:
+77:}
