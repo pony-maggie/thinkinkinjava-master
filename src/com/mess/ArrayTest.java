@@ -1,22 +1,17 @@
 package com.mess;
 
-
+//已整理blog
 public class ArrayTest 
 {
-	String s1 = new String("good");
-	String[] ss1 = {"aaa"}; //string数组，只有一个元素
-	
-	String[] m_myArray;
-	
-	//string是作为值传递，而string数组是引用传递，所以输出的结果是"goodbbb"
+	//都是引用传递, 输出的结果是"goodbbb"
 	public void arrayPassTest(String s, String[] ss)
 	{
 		s = "bad";
 		ss[0] = "bbb";
 	}
 	
-	//上面函数也给我们一个提示，当写一个函数传递数组时，不要直接对内部成员赋值，否则结果就不可控了
-	//比如下面这个函数,如果myArray被某个成员函数改变了，那么传递的这个数组也会改变
+	String[] m_myArray;
+	
 	public void setArray(String[] newArray)
 	{
 		this.m_myArray = newArray;
@@ -41,9 +36,14 @@ public class ArrayTest
 	 */
 	public static void main(String[] args) 
 	{
+		String s1 = new String("good");
+		String[] ss1 = {"aaa"}; //string数组，只有一个元素
+		
 		ArrayTest test = new ArrayTest();
-		test.arrayPassTest(test.s1, test.ss1);
-		System.out.println(test.s1+test.ss1[0]);
+		test.arrayPassTest(s1, ss1);
+		System.out.println(s1+ss1[0]);
+		
+		
 		String[] ssNew = {"ccc", "ddd"};
 		
 		test.setArrayNew(ssNew);
